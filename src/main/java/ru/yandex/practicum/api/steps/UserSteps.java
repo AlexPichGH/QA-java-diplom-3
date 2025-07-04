@@ -2,6 +2,7 @@ package ru.yandex.practicum.api.steps;
 
 
 import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
 import ru.yandex.practicum.api.ApiConfig;
 import ru.yandex.practicum.api.models.User;
 
@@ -22,15 +23,12 @@ public class UserSteps {
     }
 
     @Step("Авторизация пользователя")
-    public String loginUser(User user) {
+    public ValidatableResponse loginUser(User user) {
         return given()
                 .body(user)
                 .when()
                 .post(ApiConfig.USER_LOGIN_ENDPOINT)
-                .then()
-                .extract()
-                .body()
-                .path("accessToken");
+                .then();
     }
 
     @Step("Удаление пользователя")
