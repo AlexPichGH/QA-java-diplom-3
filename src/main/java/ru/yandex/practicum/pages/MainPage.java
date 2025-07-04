@@ -75,10 +75,10 @@ public class MainPage extends BasePage {
         return driver.findElement(mActiveTab).getText();
     }
 
-    @Step("Получить текст активной вкладки")
+    @Step("Отображение кнопки \"Оформить заказ\"")
     public boolean isPlaceOrderButtonDisplayed() {
         new WebDriverWait(driver, Duration.ofSeconds(Config.TIMEOUT))
-                .until(ExpectedConditions.visibilityOfElementLocated(mActiveTab));
+                .until(ExpectedConditions.visibilityOfElementLocated(mPlaceOrderButton));
         return driver.findElement(mPlaceOrderButton).isDisplayed();
     }
 }

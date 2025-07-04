@@ -1,5 +1,6 @@
 package ru.yandex.practicum.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.practicum.utils.Config;
 
@@ -11,12 +12,12 @@ public class BasePage {
         this.driver = driver;
     }
 
-    // запустить веб-приложение
+    @Step("Запуск веб-приложение")
     public void startWebApp() {
         driver.get(Config.SERVICE_URL);
     }
 
-    // закрыть драйвер и браузер
+    @Step("Закрыть драйвер и выключить браузер")
     public void closeDriverAndQuitBrowser() {
         driver.quit();
     }
