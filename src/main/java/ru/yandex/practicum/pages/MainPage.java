@@ -14,7 +14,7 @@ public class MainPage extends BasePage {
     // кнопка "Личный кабинет"
     private final By mPersonalAccountButton = By.cssSelector("a[href='/account']");
     // кнопка "Войти в аккаунт"
-    private final By mLoginButton = By.xpath("//button[text()='Войти в аккаунт']");
+    private final By mLoginButton = By.xpath(".//button[text()='Войти в аккаунт']");
     // вкладка "Булки"
     private final By mBunsTab = By.xpath(".//span[text()='Булки']/parent::div");
     // вкладка "Соусы"
@@ -22,9 +22,11 @@ public class MainPage extends BasePage {
     // вкладка "Начинки"
     private final By mFillingsTab = By.xpath(".//span[text()='Начинки']/parent::div");
     // выбранная вкладка
-    private final By mActiveTab = By.xpath("//div[contains(@class,'tab_tab_type_current')]/span");
+    private final By mActiveTab = By.xpath(".//div[contains(@class,'tab_tab_type_current')]/span");
     // логотип сайта
     private final By mLogo = By.className("AppHeader_header__logo__2D0X2");
+    // кнопка "Оформить заказ"
+    private final By mPlaceOrderButton = By.xpath(".//button[text()='Оформить заказ']");
 
 
     public MainPage(WebDriver driver) {
@@ -71,5 +73,12 @@ public class MainPage extends BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(Config.TIMEOUT))
                 .until(ExpectedConditions.visibilityOfElementLocated(mActiveTab));
         return driver.findElement(mActiveTab).getText();
+    }
+
+    @Step("Получить текст активной вкладки")
+    public boolean isPlaceOrderButtonDisplayed() {
+        new WebDriverWait(driver, Duration.ofSeconds(Config.TIMEOUT))
+                .until(ExpectedConditions.visibilityOfElementLocated(mActiveTab));
+        return driver.findElement(mPlaceOrderButton).isDisplayed();
     }
 }

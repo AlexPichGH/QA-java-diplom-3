@@ -5,6 +5,8 @@ import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import ru.yandex.practicum.ErrorUtils;
+import ru.yandex.practicum.pages.BasePage;
 import ru.yandex.practicum.pages.MainPage;
 
 public class ConstructorTest extends BaseTest {
@@ -14,6 +16,7 @@ public class ConstructorTest extends BaseTest {
     @Before
     public void init() {
         mainPage = new MainPage(getDriver());
+        new BasePage(getDriver()).startWebApp();
     }
 
     @Test
@@ -24,7 +27,7 @@ public class ConstructorTest extends BaseTest {
                 .clickOnFillingsTab()
                 .clickOnBunsTab()
                 .getActiveTabText();
-        Assert.assertEquals("Булки", activeTabText);
+        Assert.assertEquals(ErrorUtils.TAB_TEXT_ERROR, "Булки", activeTabText);
     }
 
     @Test
@@ -34,7 +37,7 @@ public class ConstructorTest extends BaseTest {
         String activeTabText = mainPage.waitMainPageLoad()
                 .clickOnSaucesTab()
                 .getActiveTabText();
-        Assert.assertEquals("Соусы", activeTabText);
+        Assert.assertEquals(ErrorUtils.TAB_TEXT_ERROR, "Соусы", activeTabText);
     }
 
     @Test
@@ -44,6 +47,6 @@ public class ConstructorTest extends BaseTest {
         String activeTabText = mainPage.waitMainPageLoad()
                 .clickOnFillingsTab()
                 .getActiveTabText();
-        Assert.assertEquals("Начинки", activeTabText);
+        Assert.assertEquals(ErrorUtils.TAB_TEXT_ERROR, "Начинки", activeTabText);
     }
 }
