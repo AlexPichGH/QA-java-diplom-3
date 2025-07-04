@@ -3,6 +3,8 @@ package ru.yandex.practicum.tests;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.config.HttpClientConfig;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import net.datafaker.Faker;
 import org.junit.After;
@@ -30,8 +32,6 @@ public class BaseTest {
 
         initWebDriver();
         setUpRestAssured();
-
-        new BasePage(driver).startWebApp();
     }
 
     private void initWebDriver() {
@@ -41,6 +41,7 @@ public class BaseTest {
     }
 
     private void setUpRestAssured() {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         RestAssured.config = RestAssured.config()
                 .httpClient(HttpClientConfig.httpClientConfig()
                         .setParam("http.connection.timeout", 5000)
@@ -53,7 +54,7 @@ public class BaseTest {
     }
 
     @After
-    public void tearDown() {
+    public void closeAndQuit() {
         new BasePage(driver).closeDriverAndQuitBrowser();
     }
 }
