@@ -31,8 +31,8 @@ mvn clean test
 mvn clean test -Dbrowser=yandex
 ````
 
-<h3>Создание отчёта Allure (после запуска тестов):</h3>
+<h3>Быстрый просмотр отчёта Allure в браузере (после запуска тестов):</h3>
 
 ````
-mvn allure:report
+mvn allure:serve
 ````
