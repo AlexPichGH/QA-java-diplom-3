@@ -35,7 +35,20 @@ public class BaseTest {
     }
 
     private void initWebDriver() {
-        driver = new ChromeDriver();
+        if ("yandex".equals(System.getProperty("browser"))) {
+            // для Windows
+            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
+            // для macOS
+//            System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver");
+            ChromeOptions options = new ChromeOptions();
+            // для Windows
+            options.setBinary("C:\\Users\\Admin\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
+            // для macOS
+//            options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
+            driver = new ChromeDriver(options);
+        } else {
+            driver = new ChromeDriver();
+        }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Config.TIMEOUT));
     }
